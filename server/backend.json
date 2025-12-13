@@ -1,0 +1,26 @@
+{
+  "name": "my-lowdb-app",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "full:start": "concurrently",
+    "start:backend": "node ./backend/server.js",
+    "start:frontend": "vite ./frontend",
+    "install:backend": "npm install --prefix ./backend express lowdb@next @lowdb/node",
+    "install:frontend": "npm install --prefix ./frontend react react-dom"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "express": "^4.18.2",
+    "lowdb": "^6.0.1",
+    "@lowdb/node": "^2.0.0"
+  },
+  "devDependencies": {
+    "vite": "^5.2.0",
+    "@vitejs/plugin-react": "^4.2.1",
+    "concurrently": "^8.2.2"
+  }
+}
