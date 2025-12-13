@@ -30,6 +30,19 @@ async function postData(newItem) {
     return response.json(); // Return the server's response
 }
 
+// --- FILTER Function ---
+async function filterData(criteria) {
+    const response = await fetch(API_BASE_URL + `?filter=${criteria}`, {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' }
+    });
+
+    if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    return response.json();
+}
+
 // --- DELETE Function ---
 async function deleteData(id) {
     const response = await fetch(`${API_BASE_URL}/${id}`, {
@@ -83,6 +96,10 @@ export const DataProvider = ({ children }) => { // ⬅️ PascalCase: DataProvid
         setData(prevData => prevData.filter(item => item.id !== id));
     };
 
+    const filterD = async (criteria) => {
+        await filterData(criteria);
+        setData(prevData => prevData.filter(item => item.name === criteria));
+    };
 
     return ( 
         // 3. Correct Provider Tag and Value
