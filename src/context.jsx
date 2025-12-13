@@ -9,10 +9,24 @@ export const DataContext = createContext({
     setData: () => {},
     loading: true,
     post: async () => {}, // Use async in the default value
-    del: async () => {},  // Use 'del' instead of the reserved 'delete'
+    del: async () => {},
+    fil: async () => {},
+    incount: async () => {},
+    downcount: async () => {},
 }); 
 
-
+async function incrementCount() {
+    const response = await fetch(API_BASE_URL + '/increment', {
+        method: 'PUT'
+    });
+    // Implementation for incrementing count if needed
+}
+async function decrementCount() {
+    const response = await fetch(API_BASE_URL + '/decrement', {
+        method: 'PUT'
+    });
+    // Implementation for decrementing count if needed
+} 
 // Define the helper functions outside of the Provider component
 // This ensures they are not recreated on every render (optimization)
 
