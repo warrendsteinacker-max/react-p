@@ -19,7 +19,7 @@ export default function Data({data, setData}) {
         };
 
         // 3. Update the data array by ADDING the new item, not replacing everything
-        setData(prevData => [...prevData, newItem]);
+        setData([...data, newItem]);
 
         // 4. Clear the individual input fields after submission
         setEle1('');
