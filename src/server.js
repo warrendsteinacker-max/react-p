@@ -1,5 +1,6 @@
 import express from 'express';
 import D from './data.json';
+import fs from 'fs';
 const app = express();
 const PORT = 3000;
 
@@ -8,12 +9,17 @@ app.use(express.json());
 
 app.post('/api/data', (req, res) => {
     const newItem = req.body;
-    D.push(newItem);
+    fs.appendFileSync('./data.json', JSON.stringify(newItem, null, 2));
     res.status(201).json(newItem);
 });
 
 app.get('/api/data', (req, res) => {
-    res.json(D);
+    fs.readFile('./data.json', 'utf-8', (err, data) => {
+        if (err) {
+            res.status(500).send('Error reading data');
+        } else {
+            res.json(JSON.parse(data));
+        };
 });
 app.delete('/api/data/:id', (req, res) => {
     const { id } = req.params;
