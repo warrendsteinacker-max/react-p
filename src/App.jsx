@@ -1,26 +1,52 @@
-import { useState, useEffect } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import { response } from 'express'
-import Data from './componets/data.jsx'
-
-const [data, setData] = useState(null);
-
-
-useEffect(async() => {  response= await fetch('http://localhost:3000/api/hello')
-  const data = await response.json()
-  setData(data)
-}, [])
+import { useState, useEffect } from 'react';
+import {BrowserRouter, 
+    Routes, 
+    Route, 
+    Link,
+    NavLink} from react-router-dom;
+// Remove unused imports like reactLogo, viteLogo, App.css, and { response } from 'express'
+import Data from './componets/data.jsx'; 
 
 function App() {
-  const [count, setCount] = useState(0)
+    // 1. STATE DEFINITIONS GO HERE, INSIDE THE COMPONENT
+    const [data, setData] = useState(null);
+    const [count, setCount] = useState(0); // Keeping this if you need it later
 
-  return (
-    <>
-    <Data data={data} setData={setData} />
-    </>
-  )
+    // 2. Data Fetching useEffect (runs once on mount)
+    useEffect(() => {
+        // Define an internal async function to handle the Promise chain
+        const fetchData = async () => {
+            try {
+                // 3. Declare the variable using 'const'
+                const response = await fetch('http://localhost:3000/api/hello');
+                
+                // Always check if the response was successful (status 200-299)
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const result = await response.json();
+                setData(result); // Set the fetched data to state
+            } catch (error) {
+                console.error("Failed to fetch data:", error);
+                // Optionally handle error state here
+            }
+        };
+
+        fetchData(); // Execute the async function
+    }, []); // Empty dependency array ensures it only runs once
+
+    return (
+        <>
+            {/* Conditional Rendering: Only render Data component when data is available */}
+            {data ? (
+                <Data data={data} setData={setData} />
+            ) : (
+                // Show a loading state while fetching
+                <div>Loading data...</div>
+            )}
+        </>
+    );
 }
 
-export default App
+export default App;
