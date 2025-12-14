@@ -1,37 +1,63 @@
 import express from 'express';
-import D from './data.json';
-import fs from 'fs';
+
+export const D = []
+
+
+
 const app = express();
 const PORT = 3000;
 
 app.use(express.json());
 
 
-app.post('/api/data', (req, res) => {
-    const newItem = req.body;
-    fs.appendFileSync('./data.json', JSON.stringify(newItem, null, 2));
-    res.status(201).json(newItem);
-});
+import express from 'express';
 
-app.get('/api/data', (req, res) => {
-    fs.readFile('./data.json', 'utf-8', (err, data) => {
-        if (err) {
-            res.status(500).send('Error reading data');
-        } else {
-            res.json(JSON.parse(data));
-        };
-});
-app.delete('/api/data/:id', (req, res) => {
-    const { id } = req.params;
-    const index = D.findIndex(item => item.id === parseInt(id));
-    if (index !== -1) {
-        D.splice(index, 1);
-        res.status(204).send();
-    } else {
-        res.status(404).send('Item not found');
+// 1. Initial Data (must be defined outside the route)
+let D = [
+    { id: 1, name: 'Apple', count: 5, created: '2025-01-01' },
+    { id: 2, name: 'Banana', count: 12, created: '2025-01-02' }
+]; 
+
+const app = express();
+const PORT = 3000;
+
+// 2. Middleware (Crucial for reading req.body)
+app.use(express.json()); 
+
+// --- PUT Route (Update Logic) ---
+app.put('/api/data/:id', (req, res) => {
+    // 3. FIX: Convert ID to a number for comparison
+    const {count} = req.body;
+    const targetId = parseInt(req.params.id); 
+    
+    // Find the index of the item
+    const itemIndex = D.findIndex(i => i.id === targetId);
+    
+    // 4. ERROR HANDLING: Check if the item exists
+    if (itemIndex === -1) {
+        return res.status(404).json({ error: 'Item not found' });
     }
+    
+    // 5. UPDATE: Merge old data with new data from the body
+    const existingItem = D[itemIndex];
+    
+    const updatedItem = {
+        ...existingItem, // Keep old properties (like 'created')
+        count,     // Apply new data (e.g., name, count)
+        updatedAt: new Date().toISOString() // Add metadata
+    };
+    
+    // 6. Replace the old item in the array
+    D[itemIndex] = updatedItem; 
+    
+    // 7. Success Response
+    return res.status(200).json({ 
+        message: `Item with ID ${targetId} updated successfully.`, 
+        item: updatedItem 
+    });
 });
 
+// START SERVER
 app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
+    console.log(`Server running on http://localhost:${PORT}`);
 });
