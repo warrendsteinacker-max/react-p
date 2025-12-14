@@ -57,7 +57,18 @@ app.put('/api/data/:id', (req, res) => {
     });
 });
 
+
+
+app.get('/api/data?filter=:criteria', (req, res) => {
+    const criteria = req.params.criteria;
+    const filtered = D.filter(item => item.name.includes(criteria));
+    res.json({ items: filtered });
+});
+
 // START SERVER
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
 });
+
+
+
