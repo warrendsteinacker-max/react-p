@@ -1,3 +1,4 @@
+import e from "express";
 import React, { createContext, useEffect, useMemo, useState } from "react";
 
 // --- Configuration ---
@@ -121,9 +122,20 @@ export const DataProvider = ({ children }) => { // ⬅️ PascalCase: DataProvid
             return data;
         }
 
-        if (searching)
+        if (searching) {
+            return data.filter(item => item.name.includes(searchData) || item.id.includes(searchData)
+        || item.description.includes(searchData));
+        }
     }, [data, searchData]);
 
+    const searchingstart = (searchData, searching) => {
+        setSearchData(e.target.value);
+        setSearching(true);
+    
+        if (searchData === null) {
+            setSearching(false);
+            setSearchData('');}
+        };
     return ( 
         // 3. Correct Provider Tag and Value
         <DataContext.Provider value={{ data, setData, loading, post: contextPost, del: contextDel }}>
