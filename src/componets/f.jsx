@@ -102,3 +102,12 @@ const fetchd = async () =>{
 }
     fetchd(url)
 }, [url])
+
+
+
+
+import {creatContext, useState} from 'react'
+
+
+
+
