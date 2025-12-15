@@ -1,22 +1,6 @@
 import express from 'express';
 
-export const D = []
-
-
-
-const app = express();
-const PORT = 3000;
-
-app.use(express.json());
-
-
-import express from 'express';
-
-// 1. Initial Data (must be defined outside the route)
-let D = [
-    { id: 1, name: 'Apple', count: 5, created: '2025-01-01' },
-    { id: 2, name: 'Banana', count: 12, created: '2025-01-02' }
-]; 
+const D = []
 
 const app = express();
 const PORT = 3000;
@@ -24,7 +8,9 @@ const PORT = 3000;
 // 2. Middleware (Crucial for reading req.body)
 app.use(express.json()); 
 
-// --- PUT Route (Update Logic) ---
+app.get('/api/data', (req, res) => {
+    res.send(D)
+})
 app.put('/api/data/:id', (req, res) => {
     // 3. FIX: Convert ID to a number for comparison
     const {count} = req.body;
@@ -58,12 +44,6 @@ app.put('/api/data/:id', (req, res) => {
 });
 
 
-
-app.get('/api/data?filter=:criteria', (req, res) => {
-    const criteria = req.params.criteria;
-    const filtered = D.filter(item => item.name.includes(criteria));
-    res.json({ items: filtered });
-});
 
 // START SERVER
 app.listen(PORT, () => {
