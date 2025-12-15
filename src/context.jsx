@@ -7,8 +7,11 @@ const API_BASE_URL = 'http://localhost:3000/api/data'; // Use your actual API ba
 // 1. Correct declaration and export of the Context
 export const DataContext = createContext({
     data: [],
+    
     setData: () => {},
     loading: true,
+    post: [],
+    setUptodate: async () => {},
     post: async () => {}, // Use async in the default value
     del: async () => {},
     fil: async () => {},
