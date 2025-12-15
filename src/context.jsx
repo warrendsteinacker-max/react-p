@@ -152,4 +152,5 @@ export const DataProvider = ({ children }) => { // ⬅️ PascalCase: DataProvid
             {children}
         </DataContext.Provider>
     );
+}
 };
