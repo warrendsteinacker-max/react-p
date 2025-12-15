@@ -73,3 +73,24 @@ function MyComponent({ url }) {
   
   // ... rest of the component
 }
+
+useEffect(() => {
+const fetchd = async () =>{
+    try{
+    setLoading(true)
+    res = await fetch(url)
+
+    }
+    catch{
+
+        console.error(error.message)
+
+    }
+    finally{
+
+        setLoading(false)
+    }
+
+}
+    fetchd(url)
+}, [url])

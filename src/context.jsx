@@ -7,7 +7,6 @@ const API_BASE_URL = 'http://localhost:3000/api/data'; // Use your actual API ba
 // 1. Correct declaration and export of the Context
 export const DataContext = createContext({
     data: [],
-    
     setData: () => {},
     loading: true,
     post: [],
@@ -167,7 +166,7 @@ export const DataProvider = ({ children }) => { // ⬅️ PascalCase: DataProvid
 
     return ( 
         // 3. Correct Provider Tag and Value
-        <DataContext.Provider value={{ data, setData, loading, post: contextPost, del: contextDel, search: searchingstart, putfunc: upFunc }}>
+        <DataContext.Provider value={{post, setUptodate, data, setData, loading, post: contextPost, del: contextDel, search: searchingstart, putfunc: upFunc }}>
             {children}
         </DataContext.Provider>
     );
