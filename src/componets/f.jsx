@@ -78,7 +78,15 @@ useEffect(() => {
 const fetchd = async () =>{
     try{
     setLoading(true)
-    res = await fetch(url)
+    const res = await fetch(url)
+        if (!res.ok){
+            throw new Error(res.status)
+        }
+
+        else {
+            const data = await res.json()
+            setData(data)
+        }
 
     }
     catch{
