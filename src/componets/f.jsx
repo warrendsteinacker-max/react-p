@@ -126,3 +126,32 @@ export const DataProvider = ({children}) => {
         return(<DataContext.Provider value={{data, setData}}>{children}</DataContext.Provider>)
 }
 
+
+
+
+
+
+import {BrowserRouter, Routes, Route, Link} from 'react-router-dom'
+
+import { DataProvider } from "../context";
+
+
+
+export const App = () => {
+    
+    
+    return(<DataProvider>  
+        <BrowserRouter> 
+        <Routes>
+            <Route>  </Route>
+            <Route>  </Route>
+            <Route>  </Route>
+        </Routes>
+        </BrowserRouter>
+    </DataProvider>)
+
+
+
+
+} 
+
