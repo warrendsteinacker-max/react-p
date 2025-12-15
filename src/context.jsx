@@ -123,16 +123,16 @@ export const DataProvider = ({ children }) => { // ⬅️ PascalCase: DataProvid
         }
 
         if (searching) {
-            return data.filter(item => item.name.includes(searchData) || item.id.includes(searchData)
-        || item.description.includes(searchData));
+           const value = searchData.toLowerCase();
+            return data.filter(item => item.name.toLowerCase().includes(value) || item.description.toLowerCase().includes(value));
         }
-    }, [data, searchData]);
+        return data;
+    }, [data, searchData, searching]);
 
     const searchingstart = (e) => {
         setSearchData(e.target.value);
-        
-    
-        if (searchData === null) {
+        setSearching(true);
+        if (searchData.trim() === '') {
             setSearching(false);
             setSearchData('');}
         };
