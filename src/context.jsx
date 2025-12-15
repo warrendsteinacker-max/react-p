@@ -130,11 +130,15 @@ export const DataProvider = ({ children }) => { // ⬅️ PascalCase: DataProvid
     }, [data, searchData, searching]);
 
     const searchingstart = (e) => {
-        setSearchData(e.target.value);
-        setSearching(true);
-        if (searchData.trim() === '') {
+        newData = e.target.value;
+        setSearchData(newData);
+        if (newData.trim() === '') {
             setSearching(false);
-            setSearchData('');}
+        }
+        else  {
+            setSearching(true);
+        }
+        
         };
     return ( 
         // 3. Correct Provider Tag and Value
