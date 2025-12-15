@@ -77,6 +77,7 @@ async function deleteData(id) {
 export const DataProvider = ({ children }) => { // ⬅️ PascalCase: DataProvider
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [post, setUptodate] = useState([]);
 
     // --- Initial GET Fetch (Runs once on mount) ---
     useEffect(() => {
