@@ -111,3 +111,17 @@ import {creatContext, useState} from 'react'
 
 
 
+export const DataContext = creatContext({
+    setData: () => {},
+    data: [],
+})
+
+
+export const DataProvider = ({children}) => {
+
+
+
+
+}
+
+<DataContext value = {{}}>{children}</DataContext>
