@@ -118,7 +118,7 @@ export const DataProvider = ({ children }) => { // ⬅️ PascalCase: DataProvid
 
     const filtercontent = useMemo(() => {
         
-        if (data.length === prevData.length + 1 || data.length === prevData.length - 1) {
+        if (!searchData || searchData.trim() === '') {
             return data;
         }
 
@@ -128,9 +128,9 @@ export const DataProvider = ({ children }) => { // ⬅️ PascalCase: DataProvid
         }
     }, [data, searchData]);
 
-    const searchingstart = (searchData, searching) => {
+    const searchingstart = (e) => {
         setSearchData(e.target.value);
-        setSearching(true);
+        
     
         if (searchData === null) {
             setSearching(false);
