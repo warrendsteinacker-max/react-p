@@ -10,6 +10,8 @@ export const DataContext = createContext({
     setData: () => {},
     loading: true,
     post: [],
+    setSearchdata: () => {},
+    searchData: [],
     setUptodate: async () => {},
     post: async () => {}, // Use async in the default value
     del: async () => {},
@@ -62,6 +64,7 @@ export const DataProvider = ({ children }) => { // ⬅️ PascalCase: DataProvid
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
     const [post, setUptodate] = useState([]);
+    const [searchData, setSearchdata] = useState([])
 
     // --- Initial GET Fetch (Runs once on mount) ---
     useEffect(() => {
@@ -111,16 +114,9 @@ export const DataProvider = ({ children }) => { // ⬅️ PascalCase: DataProvid
         setData(prevData => prevData.filter(item => item.id !== id));
     };
 
-    const filterD = async (criteria) => {
-        await filterData(criteria);
-        setData(prevData => prevData.filter(item => item.name === criteria));
-    };
-
-
-
     const searchingstart = (e) => {
         newData = e.target.value;
-        setSearchData(newData);
+        setSearchdata(newData);
         if (newData.trim() === '') {
             setSearching(false);
         }
@@ -148,7 +144,7 @@ export const DataProvider = ({ children }) => { // ⬅️ PascalCase: DataProvid
 
     return ( 
         // 3. Correct Provider Tag and Value
-        <DataContext.Provider value={{post, setUptodate, data, setData, loading, post: contextPost, del: contextDel, search: searchingstart, putfunc: upFunc }}>
+        <DataContext.Provider value={{setSearchdata, searchData, post, setUptodate, data, setData, loading, post: contextPost, del: contextDel, search: searchingstart, putfunc: upFunc }}>
             {children}
         </DataContext.Provider>
     );

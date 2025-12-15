@@ -6,10 +6,13 @@ export const Home = () => {
 
     // 2. Consume loading state for proper UX
     // Assuming contextDel is correctly exposed as the delete function
-    const { data, contextDel, loading } = useContext(DataContext); 
+    const { data, contextDel, loading, searchingstart, searchData } = useContext(DataContext); 
+
+
 
     // Handle loading state
     if (loading) {
+        <input placeholder='Item Search' onChange={searchingstart} value={searchData}/>
         return <div>Loading items...</div>;
     }
     
@@ -27,7 +30,7 @@ export const Home = () => {
         <>
 
 
-            <input />
+            <input placeholder='Item Search' onChange={searchingstart} value={searchData}/>
             {/* Navigation links */}
             <Link to="/postdata">Add to storage</Link>
             {' | '}
