@@ -159,6 +159,8 @@ export const DataProvider = ({ children }) => { // ⬅️ PascalCase: DataProvid
         ))
         };
 
+        //is corrected 
+
     return ( 
         // 3. Correct Provider Tag and Value
         <DataContext.Provider value={{ data, setData, loading, post: contextPost, del: contextDel, search: searchingstart, putfunc: upFunc }}>
