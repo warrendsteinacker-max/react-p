@@ -106,12 +106,12 @@ const fetchd = async () =>{
 
 
 
-import {creatContext, useState} from 'react'
+import {createContext, useState} from 'react'
 
 
 
 
-export const DataContext = creatContext({
+export const DataContext = createContext({
     setData: () => {},
     data: [],
 })
@@ -119,9 +119,10 @@ export const DataContext = creatContext({
 
 export const DataProvider = ({children}) => {
 
+    const [data, setData] = useState([])
 
 
 
+        return(<DataContext.Provider value={{data, setData}}>{children}</DataContext.Provider>)
 }
 
-<DataContext value = {{}}>{children}</DataContext>
