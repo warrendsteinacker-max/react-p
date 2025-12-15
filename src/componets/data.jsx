@@ -1,54 +1,60 @@
-import { useContext, useState } from "react";
-// 1. You MUST import the context object you want to use!
+import React, { useContext, useState } from "react";
+// Import the component used to get context
 import { DataContext } from "./DataContext"; 
+// Import a navigation hook if you want to redirect after submission
+// import { useNavigate } from "react-router-dom"; 
 
-// 2. Component does NOT take any props, as it uses Context
-export const post_page = () => {
+// Use PascalCase for component names (PostPage)
+export const PostPage = () => {
 
-    // 3. useContext call is INSIDE the component function
-    const { data, contextPost, setData } = useContext(DataContext);
+    // Consume the context values needed
+    const { contextPost } = useContext(DataContext); 
+    // const navigate = useNavigate(); // For optional redirection
 
-
-    const [des, setDes] = useState("item description")
-
-    const [name, setName] = useState("item name")
-
-    const [count, setCount] = useState("amount of the item")
+    // Initialize state with empty strings for a blank form
+    const [des, setDes] = useState(""); 
+    const [name, setName] = useState(""); 
+    const [count, setCount] = useState(""); 
     
-    const settc = (e) => {
-        setCount(e.target.value)
-    }
+    // Use consistent, descriptive names for handlers
+    const handleCountChange = (e) => setCount(e.target.value);
+    const handleNameChange = (e) => setName(e.target.value);
+    const handleDesChange = (e) => setDes(e.target.value);
 
-    const settn = (e) => {
-        setName(e.target.value)
-    }
+    // --- Submission Handler (CRITICAL FIX) ---
+    const handleSubmit = (e) => {
+        e.preventDefault(); // 1. CRITICAL: Prevent default page reload
 
-    const settd = (e) => {
-        setDes(e.target.value)
-    }
-
-    const makePost = () => {
         const newpost = {
-            id: data.leagth + 1,
+            // 2. CRITICAL FIX: REMOVE client-side ID generation
             name: name,
             description: des,
-            count: count
-        }
-        contextPost(newpost)
-    }
+            count: Number(count) // Convert count to a number before sending
+        };
+        
+        // Call the context function to send the data
+        contextPost(newpost);
+        
+        // Optional: Clear form inputs after submission
+        setName('');
+        setDes('');
+        setCount('');
+        
+        // Optional: Redirect the user
+        // navigate('/'); 
+    };
 
     return(
         <>
-        <form onSubmit={makePost()}>
-            <input type="text" value={name} onChange={settn}/>
-            <input type="text" value={count} onChange={settc}/>
-            <textarea type="text" value={des} onChange={settd}/>
-            <button type="submit">make post</button>
-        </form>
+            <h1>Create New Item</h1>
+            {/* 3. CRITICAL FIX: Pass the function reference to onSubmit */}
+            <form onSubmit={handleSubmit}> 
+                <input type="text" placeholder="Item name" value={name} onChange={handleNameChange}/>
+                <input type="number" placeholder="Amount of the item" value={count} onChange={handleCountChange}/>
+                <textarea placeholder="Item description" value={des} onChange={handleDesChange}/>
+                
+                <button type="submit">Make Post</button>
+            </form>
         </>
-
-    )
-
-
-
+    );
 }
