@@ -145,11 +145,20 @@ export const DataProvider = ({ children }) => { // ⬅️ PascalCase: DataProvid
         
         };
 
-        const upFunc = (post) => {
-        await backendupdate(post);
-        setData(post, ...data)
-        };
+        const upFunc = async (post) => {
+        const serverrespond = await backendupdate(post);
+        setData(data.map((item) => {
+
+         if(item.id === serverrespond.id) {
+            return serverrespond
+         } else {
+            return item
+         }
         
+        }
+        ))
+        };
+
     return ( 
         // 3. Correct Provider Tag and Value
         <DataContext.Provider value={{ data, setData, loading, post: contextPost, del: contextDel, search: searchingstart, putfunc: upFunc }}>
