@@ -96,6 +96,19 @@ export const DataProvider = ({ children }) => { // ⬅️ PascalCase: DataProvid
         };
         fetchData(); 
     }, []); 
+
+        const filtercontent = useMemo(() => {
+        
+        if (!searchData || searchData.trim() === '') {
+            return data;
+        }
+
+        if (searching) {
+           const value = searchData.toLowerCase();
+            return data.filter(item => item.name.toLowerCase().includes(value) || item.description.toLowerCase().includes(value));
+        }
+        return data;
+    }, [data, searchData, searching]);
     
     // --- Context Functions for Components to Call ---
     
@@ -116,18 +129,7 @@ export const DataProvider = ({ children }) => { // ⬅️ PascalCase: DataProvid
         setData(prevData => prevData.filter(item => item.name === criteria));
     };
 
-    const filtercontent = useMemo(() => {
-        
-        if (!searchData || searchData.trim() === '') {
-            return data;
-        }
 
-        if (searching) {
-           const value = searchData.toLowerCase();
-            return data.filter(item => item.name.toLowerCase().includes(value) || item.description.toLowerCase().includes(value));
-        }
-        return data;
-    }, [data, searchData, searching]);
 
     const searchingstart = (e) => {
         newData = e.target.value;
@@ -142,7 +144,7 @@ export const DataProvider = ({ children }) => { // ⬅️ PascalCase: DataProvid
         };
     return ( 
         // 3. Correct Provider Tag and Value
-        <DataContext.Provider value={{ data, setData, loading, post: contextPost, del: contextDel }}>
+        <DataContext.Provider value={{ data, setData, loading, post: contextPost, del: contextDel, search: searchingstart }}>
             {children}
         </DataContext.Provider>
     );
