@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useState } from "react";
+import React, { createContext, useEffect, useMemo, useState } from "react";
 
 // --- Configuration ---
 const API_BASE_URL = 'http://localhost:3000/api/data'; // Use your actual API base path
@@ -114,6 +114,15 @@ export const DataProvider = ({ children }) => { // ⬅️ PascalCase: DataProvid
         await filterData(criteria);
         setData(prevData => prevData.filter(item => item.name === criteria));
     };
+
+    const filtercontent = useMemo(() => {
+        
+        if (data.length === prevData.length + 1 || data.length === prevData.length - 1) {
+            return data;
+        }
+
+        if (searching)
+    }, [data, searchData]);
 
     return ( 
         // 3. Correct Provider Tag and Value
