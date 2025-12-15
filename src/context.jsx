@@ -14,6 +14,8 @@ export const DataContext = createContext({
     fil: async () => {},
     incount: async () => {},
     downcount: async () => {},
+    putfunc: async () => {},
+    search: () => {},
 }); 
 
 async function incrementCount() {
@@ -142,9 +144,11 @@ export const DataProvider = ({ children }) => { // ⬅️ PascalCase: DataProvid
         }
         
         };
+
+        const upFunc = async () => {
     return ( 
         // 3. Correct Provider Tag and Value
-        <DataContext.Provider value={{ data, setData, loading, post: contextPost, del: contextDel, search: searchingstart }}>
+        <DataContext.Provider value={{ data, setData, loading, post: contextPost, del: contextDel, search: searchingstart, putfunc: upFunc }}>
             {children}
         </DataContext.Provider>
     );
