@@ -14,24 +14,18 @@ export const DataContext = createContext({
     post: async () => {}, // Use async in the default value
     del: async () => {},
     fil: async () => {},
-    incount: async () => {},
-    downcount: async () => {},
     putfunc: async () => {},
     search: () => {},
 }); 
 
-async function incrementCount() {
-    const response = await fetch(API_BASE_URL + '/increment', {
+async function Backendupdate() {
+    const response = await fetch(API_BASE_URL, {
         method: 'PUT'
     });
     // Implementation for incrementing count if needed
 }
-async function decrementCount() {
-    const response = await fetch(API_BASE_URL + '/decrement', {
-        method: 'PUT'
-    });
-    // Implementation for decrementing count if needed
-} 
+
+    // Implementation for decrementing count if neede 
 // Define the helper functions outside of the Provider component
 // This ensures they are not recreated on every render (optimization)
 
@@ -49,18 +43,6 @@ async function postData(newItem) {
     return response.json(); // Return the server's response
 }
 
-// --- FILTER Function ---
-async function filterData(criteria) {
-    const response = await fetch(API_BASE_URL + `?filter=${criteria}`, {
-        method: 'GET',
-        headers: { 'Content-Type': 'application/json' }
-    });
-
-    if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    return response.json();
-}
 
 // --- DELETE Function ---
 async function deleteData(id) {
@@ -149,7 +131,7 @@ export const DataProvider = ({ children }) => { // ⬅️ PascalCase: DataProvid
         };
 
         const upFunc = async (post) => {
-        const serverrespond = await backendupdate(post);
+        const serverrespond = await Backendupdate(post);
         setData(data.map((item) => {
 
          if(item.id === serverrespond.id) {

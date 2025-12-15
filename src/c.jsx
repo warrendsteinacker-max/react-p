@@ -25,6 +25,9 @@ export const Home = () => {
 
     return (
         <>
+
+
+            <input />
             {/* Navigation links */}
             <Link to="/postdata">Add to storage</Link>
             {' | '}
