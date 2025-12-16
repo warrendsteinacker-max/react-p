@@ -118,6 +118,25 @@ export const Home = () => {
     </>)
 }
 
-export const
+
+
+
+setData, data, loading, e: edit, d: del, p: post
+
+import { useContext, useState} from 'react';
+import { DataContext } from
+
+export const PostPage = () => {
+    const {post, data} = useContext(DataProvider)
+    const [namee, setName] = useState("")
+    const [] = useState("")
+    const [] = useState("")
+    const index = parseInt(sdata.leangth) + 1 
+
+    const submitp = () => {
+        let newp = {name: namee, des: dess, countt: count }
+        post(newp)
+    }
+}
 
 
