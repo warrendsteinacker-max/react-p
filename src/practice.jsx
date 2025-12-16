@@ -13,3 +13,11 @@ const searching = (e) => {
 const Home = ({items}) => {
     {items.map((item) => <p>{item.name}</p>)}
 }
+
+
+
+const fn = (post) => {
+    const newdata = [...data, post]
+    setPosts(newdata)
+    localStorage.setItem(JSON.stringify(newdata))
+}
