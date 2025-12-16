@@ -79,8 +79,24 @@ return(<DataContext.Provider value={{setData, data, loading, e: edit, d: del, p:
 
 import {Routes, Route, BrowserRouter, Link} from 'react-router-dom';
 import { DataProvider } from './context';
+import {Home} from './vontext'
+import {Edit} from './dontext'
+import {Post} from './fontext'
 
 
 export const App = () => {
+   return(<>
     
+    <DataProvider>
+        <BrowserRouter>
+        <Link to="/post">Go to post page</Link>
+            <Routes>
+                <Route path="/" element={<Home/>}/>
+                <Route path="/edit" element={<Edit/>}/>
+                <Route path="/post" element={<Post/>}/>
+            </Routes>
+        </BrowserRouter>
+    </DataProvider>
+    
+    </>)
 }
