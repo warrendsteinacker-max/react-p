@@ -1,12 +1,14 @@
-import React, {createContext, useEffect, useState, useMemo} from 'react';
+import React, {createContext, useEffect, useState} from 'react';
 import axios from 'axios';
-import {useParams} from 'react-router-dom';
 
 
 export const DataContext = createContext({
     data: [],
     setData: () => {},
-    loading: true
+    loading: true,
+    p: async() => {},
+    e: async() => {},
+    d: async() => {},
 })
 
 
@@ -16,6 +18,13 @@ export const DataProvider = () => {
     const [loading, setLoading] =usestate(true)
     useEffect(()=> {
         const fetchd = async ()  => {
+            try{
+                response = await axios.get(`api/data`)
+                if (!response.ok) {
+                    throw new Error(response.status)
+                setData()
+                }
+            }
 
 
 
@@ -23,10 +32,10 @@ export const DataProvider = () => {
     }
     }, [url])
 
-    const post = async (newpost) => {
-        setData(data => [data, newpost])
-        axios.post('api/data', newpost)
-
+    const edit = async (newdata) => {
+            const res = await axios.put(`api/data/${newdata.id}`, newdata)
+            const Ndata = data.map(item => { if(item.id === newdata.id){ return newdata} else{ return item}})
+            setData(Ndata) 
     }
 
     const del = async (id) => {
@@ -36,11 +45,11 @@ export const DataProvider = () => {
             }
 
 
-    const edit = async (newdata) => {
-        const res = await axios.post(`api/post`, newdata)
-        setData(data => [...data, newdata])
+    const post = async (newpost) => {
+        const res = await axios.post(`api/post`, newpost)
+        setData(data => [...data, newpost])
         
     }
 
-return(<DataContext.Provider value={{}}>{children}</DataContext.Provider>)
+return(<DataContext.Provider value={{setData, data, loading, e: edit, d: del, p: post}}>{children}</DataContext.Provider>)
 } 
