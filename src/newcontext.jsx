@@ -100,3 +100,20 @@ export const App = () => {
     
     </>)
 }
+
+
+setData, data, loading, e: edit, d: del, p: post
+
+
+
+import { useContext, useState} from 'react';
+import { DataContext } from 
+
+export const Home = () => {
+    const {data} = useContext(DataContext)
+    
+    return
+}
+
+
+
