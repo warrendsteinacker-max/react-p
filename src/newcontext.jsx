@@ -67,4 +67,20 @@ export const DataProvider = ({children}) => {
     }
 
 return(<DataContext.Provider value={{setData, data, loading, e: edit, d: del, p: post}}>{children}</DataContext.Provider>)
-} 
+}
+
+
+
+
+
+
+
+
+
+import {Routes, Route, BrowserRouter, Link} from 'react-router-dom';
+import { DataProvider } from './context';
+
+
+export const App = () => {
+    
+}
