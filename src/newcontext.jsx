@@ -92,7 +92,7 @@ export const App = () => {
         <Link to="/post">Go to post page</Link>
             <Routes>
                 <Route path="/" element={<Home/>}/>
-                <Route path="/edit" element={<Edit/>}/>
+                <Route path="/edit/:id" element={<Edit/>}/>
                 <Route path="/post" element={<Post/>}/>
             </Routes>
         </BrowserRouter>
@@ -110,10 +110,14 @@ import { useContext, useState} from 'react';
 import { DataContext } from 
 
 export const Home = () => {
-    const {data} = useContext(DataContext)
+    const {data, loading, del} = useContext(DataContext)
     
-    return
+    return (<>
+    {loading ? <p>loading...</p> : data.map((item) => <div><h5>item.name</h5><h1>item.count</h1><p1>item.des</p1><button onClick={() => del(item.id)}>Delete</button></div>)}
+    <Link to="edit/:id">Edit post</Link>
+    </>)
 }
 
+export const
 
 
