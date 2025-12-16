@@ -129,13 +129,23 @@ import { DataContext } from
 export const PostPage = () => {
     const {post, data} = useContext(DataProvider)
     const [namee, setName] = useState("")
-    const [] = useState("")
-    const [] = useState("")
-    const index = parseInt(sdata.leangth) + 1 
+    const [countt, setCount] = useState("")
+    const [dess, setDes] = useState("")
+    const index = parseInt(data.leangth) + 1 
 
     const submitp = () => {
-        let newp = {name: namee, des: dess, countt: count }
+        let newp = {id: index, name: namee, des: dess, count: countt }
         post(newp)
+    }
+
+    const fn = (e) => {
+        setName(e.target.value)
+    }
+    const fc = (e) => {
+        setCount(e.target.value)
+    }
+    const fd = (e) => {
+        setDes(e.target.value)
     }
 }
 
