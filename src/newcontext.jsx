@@ -30,24 +30,14 @@ export const DataProvider = () => {
     }
 
     const del = async (id) => {
-
-        const {id} = useParams()
-
-        try {
-            const res = await axios.delete("api/delete", id)
-            if (!res.ok) {
-                throw new Error(res.status)
+            const res = await axios.delete(`api/delete/${}`)
+            const fdata = data.filter((i)=> i.id !== id)
+            setData(fdata) 
             }
-        }
-        catch(error){
-            console.error(error.message)
-        }
-        const fildata = data.filter((item) => item.id === id)
-        setData(fildata) 
-    }
+
 
     const edit = async (newdata) => {
-
+        const res = await
     }
 
 return(<DataContext.Provider value={{}}>{children}</DataContext.Provider>)
