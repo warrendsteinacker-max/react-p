@@ -12,25 +12,40 @@ export const DataContext = createContext({
 })
 
 
-export const DataProvider = () => {
+export const DataProvider = ({children}) => {
     
     const [data, setData] = useState([])
-    const [loading, setLoading] =usestate(true)
-    useEffect(()=> {
-        const fetchd = async ()  => {
-            try{
-                response = await axios.get(`api/data`)
-                if (!response.ok) {
-                    throw new Error(response.status)
-                setData()
-                }
-            }
+    const [loading, setLoading] = useState(true)
 
 
+    useEffect(() => {
+    const fetchData = async () => {
+        try {
+            setLoading(true);
 
+            // 1. Fetch Request
+            const response = await axios.get(`api/data`);
 
-    }
-    }, [url])
+            const data = response.data;
+
+            // 4. Update state
+            setData(data);
+
+        } catch (error) {
+            // Catches network errors or the error manually thrown above
+            console.error("Data fetching failed:", error.message);
+            // You might want to display the error to the user
+            
+        } finally {
+            // Runs after try or catch block
+            setLoading(false);
+        }
+    };
+
+    fetchData();
+
+    }, []);
+    
 
     const edit = async (newdata) => {
             const res = await axios.put(`api/data/${newdata.id}`, newdata)
