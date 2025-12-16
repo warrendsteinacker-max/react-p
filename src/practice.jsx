@@ -8,8 +8,8 @@ const searching = (e) => {
 } 
 
 
-<Home items={items.toLowercase.includes(search)}/>
+<Home items={items.filter((item) => item.toLowercase().includes(search.toLowercase())}/>
 
-const Home = ({}) => {
-    {}
+const Home = ({items}) => {
+    {items.map((item) => <p>{item.name}</p>)}
 }
