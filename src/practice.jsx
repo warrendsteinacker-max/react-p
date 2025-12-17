@@ -89,6 +89,10 @@ const delP = (id) => {
     }
 }
 
+const editp = (Epost) => {
+    
+}
+
 //got it 
 
 
