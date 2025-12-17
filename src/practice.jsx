@@ -67,7 +67,8 @@ console.error(error.message)
 
 const postD = (newpost) => {
     try{
-
+        const npost = JSON.parse(newpost)
+        localStorage.setItem('items', npost)
     }
     catch(error){
         console.error(error.message)
