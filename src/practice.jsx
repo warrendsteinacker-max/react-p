@@ -90,7 +90,20 @@ const delP = (id) => {
 }
 
 const editp = (Epost) => {
-    
+
+    try{
+        const allnp = data.map((i) => { 
+
+            if (i.id === Epost.id){ return Epost}
+            else {return i}
+        })
+        setData(allnp)
+        const allnps = JSON.stringify(allnp)
+        localStorage.setItem('items', allnps)
+    }
+    catch(error){
+        console.error(error.message)
+    }
 }
 
 //got it 
