@@ -21,3 +21,30 @@ const fn = (post) => {
     setPosts(newdata)
     localStorage.setItem(JSON.stringify(newdata))
 }
+
+JSON.parse(localStorage.setItem(posts))
+
+const fnn = async (id) => {
+    try{
+    const fdata = data.filter((d) => {return d.id !== id})
+    setData(fdata)
+    await axios.delete(`api/data/${id}`)
+    } catch (error){
+        console.error(error.message)
+    }
+}
+
+const fnnn = async (up2date) => {
+    try{
+        res = await axios.put(`api/data/${id}`, up2date)
+        const newdata = data.map((i) => {if(i.id == up2date){
+            return up2date 
+        } else {
+            return i
+        }})
+        setData(newdata)
+    } finally {
+        console.log("n")
+    }    
+}
+
