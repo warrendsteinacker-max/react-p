@@ -77,6 +77,8 @@ const postD = (newpost) => {
     }
 }
 
+//fixed it
+
 
 
 
