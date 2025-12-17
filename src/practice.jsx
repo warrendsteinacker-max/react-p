@@ -80,7 +80,13 @@ const postD = (newpost) => {
 //fixed it
 
 const delP = (id) => {
-    
+    try {
+        allnp = data.filter((i) => i.id !== id)
+        setData(allnp)
+        localStorage.setItem('items', JSON.parse(allnp))}
+    catch(error){
+        console.error(error.message)
+    }
 }
 
 
