@@ -65,7 +65,14 @@ console.error(error.message)
 
 
 
+const postD = (newpost) => {
+    try{
 
+    }
+    catch(error){
+        console.error(error.message)
+    }
+}
 
 
 
