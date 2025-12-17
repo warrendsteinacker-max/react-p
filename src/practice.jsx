@@ -47,4 +47,14 @@ const fnnn = async (up2date) => {
         console.log("n")
     }    
 }
-
+const fns 
+const fns = async (newdata) => {
+    try{
+        await axios.put(`api/data/${id}`, newdata) 
+        newposts = data.map((i) => { if(i.id === newdata.id){return newdata} else{return i}})
+        setData(newposts)
+    }
+    catch(error) {
+console.error(error.message)
+    }
+}
