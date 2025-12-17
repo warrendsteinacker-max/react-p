@@ -74,15 +74,28 @@ console.error(error.message)
 
 
 
+
 useEffect(() => {
-    const saved = JSON.parse(localStorage.getItem('items') 
-        if (saved) {
-            setData(saved)
-        }
-        else{
-           setData([]) 
-        }
-}, [])
+  const loadData = () => {
+    try {
+      const saved = localStorage.getItem('items');
+      
+      if (saved) {
+        // Only parse if 'saved' actually contains something
+        setData(JSON.parse(saved));
+      } else {
+        // Fallback to an empty array if storage is empty
+        setData([]);
+      }
+    } catch (error) {
+      console.error("Could not parse data from localStorage", error);
+      setData([]); // Fallback on error
+    }
+  };
+
+  loadData();
+}, []); // Empty array ensures this only runs ONCE on mount
+
 
 const fnz = async(newpost) => {
     try{
