@@ -67,10 +67,10 @@ console.error(error.message)
 
 const postD = (newpost) => {
     try{
-        const npost = JSON.stringify(newpost)
-        const allp = [...data, npost]
+        const allp = [...data, newpost]
         setData(allp)
-        localStorage.setItem('items', allp)
+        const nposts = JSON.stringify(allp)
+        localStorage.setItem('items', nposts)
     }
     catch(error){
         console.error(error.message)
