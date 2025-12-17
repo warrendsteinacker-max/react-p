@@ -1,5 +1,7 @@
 // practice 
 
+import { useEffect } from "react"
+
 const p = ({search, setSearch}) => {
 const searching = (e) => {
     setSearch(e.target.value)
@@ -72,8 +74,15 @@ console.error(error.message)
 
 
 
-
+useEffect(() => {
+    setData(JSON.parse(localStorage.getItem('items')))
+}, (data))
 
 const fnz = async(newpost) => {
+    try{
 
+    }
+    catch(error){
+
+    }
 }
