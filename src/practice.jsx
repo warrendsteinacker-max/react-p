@@ -75,8 +75,14 @@ console.error(error.message)
 
 
 useEffect(() => {
-    setData(JSON.parse(localStorage.getItem('items')))
-}, (data))
+    const saved = JSON.parse(localStorage.getItem('items') 
+        if (saved) {
+            setData(saved)
+        }
+        else{
+           setData([]) 
+        }
+}, [])
 
 const fnz = async(newpost) => {
     try{
