@@ -58,3 +58,22 @@ const fns = async (newdata) => {
 console.error(error.message)
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+const fnz = async(newpost) => {
+
+}
