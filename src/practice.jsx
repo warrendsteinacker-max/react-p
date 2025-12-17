@@ -79,6 +79,10 @@ const postD = (newpost) => {
 
 //fixed it
 
+const delP = (id) => {
+    
+}
+
 
 
 
