@@ -83,7 +83,7 @@ const delP = (id) => {
     try {
         allnp = data.filter((i) => i.id !== id)
         setData(allnp)
-        localStorage.setItem('items', JSON.parse(allnp))}
+        localStorage.setItem('items', JSON.stringify(allnp))}
     catch(error){
         console.error(error.message)
     }
