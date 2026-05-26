@@ -4,15 +4,16 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "nodemon server",
+    "dev": "vite",
+    "server": "nodemon server.js",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
     "start": "node index.js"
   },
   "dependencies": {
+    "axios": "^1.13.2",
     "concurrently": "^9.2.1",
-    "express": "^5.2.1",
     "react": "^19.2.0",
     "react-dom": "^19.2.0"
   },
